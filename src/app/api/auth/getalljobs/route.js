@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import connectDB from '@/app/lib/config/db.js'
 import Compnay from '@/app/lib/models/company.model'
 import Job from '@/app/lib/models/job.model.js'
-import next from 'next';
+
 export async function POST(req) {
 try{
 
