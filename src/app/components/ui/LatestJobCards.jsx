@@ -20,7 +20,7 @@ const LatestJobCards = ({job}) => {
   onClick={handleclick}
   className="p-4 sm:p-5 w-full max-w-xl mx-auto rounded-xl shadow-2xl bg-white border border-purple-200 cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
 >
-  {/* Company Info */}
+  
   <div className="flex items-center gap-3 mb-3">
     <Avatar className="h-10 w-10">
       <AvatarImage src={job?.company.imageUrl} />

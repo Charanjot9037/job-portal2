@@ -4,15 +4,23 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setUser } from "@/redux/authSlice.js";
 import { Loader2 } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { useState } from "react";
 export default function LoginPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { loading } = useSelector(store => store.auth);
+  const [showPassword, setShowPassword] = useState(false);
 
+ 
+
+  const toggleVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
   const {
     register,
     handleSubmit,
@@ -72,36 +80,42 @@ export default function LoginPage() {
             />
             {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>}
           </div>
+          <div className="w-full">
+      <label className="block text-sm font-medium mb-1">Password</label>
 
-          {/* Password */}
-          <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              {...register("password", { required: "Password is required" })}
-              className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${
-                errors.password ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-[#6A38C2]'
-              }`}
-            />
-            {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>}
-          </div>
+      {/* Input wrapper */}
+      <div className="relative">
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter your password"
+          {...register("password", { required: "Password is required" })}
+          className={`w-full px-4 py-2 pr-10 border rounded focus:outline-none focus:ring-2 ${
+            errors.password
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-[#6A38C2]"
+          }`}
+        />
 
-          {/* Role */}
-          <div>
-            <label className="block text-sm font-medium mb-1">Role</label>
-            <input
-              type="text"
-              placeholder="Student / Recruiter"
-              {...register("role", { required: "Role is required" })}
-              className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${
-                errors.role ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-[#6A38C2]'
-              }`}
-            />
-            {errors.role && <p className="text-sm text-red-500 mt-1">{errors.role.message}</p>}
-          </div>
+        {/* Eye Icon Button */}
+        <button
+          type="button"
+          onClick={toggleVisibility}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          tabIndex={-1}
+        >
+          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      </div>
 
-          {/* Submit */}
+      {/* Error Message */}
+      {errors.password && (
+        <p className="text-sm text-red-500 mt-1">
+          {errors.password.message}
+        </p>
+      )}
+    </div>
+
+ 
           <div>
             {loading ? (
               <button className="w-full flex justify-center items-center bg-[#6A38C2] text-white py-2 rounded-md">
@@ -123,12 +137,19 @@ export default function LoginPage() {
             <Link href="/register" className="text-[#6A38C2] hover:underline">
               Sign Up
             </Link>
-          </p>
+
+                </p>
+                
+          <p className="text-sm text-center text-[#6A38C2]">
+             <Link href="/forget-password"><span className="text-black">Forget</span> password</Link>
+                </p>
+       
+        
         </form>
      
       </motion.div>
 
-  <div className="flex justify-center items-center ">
+  <div className="hidden  lg:flex justify-center items-center ">
        <DotLottieReact
          src="https://lottie.host/66a1f89a-f5a7-45da-8660-77b3a662e6d0/H8Yd73bAQR.lottie"
     

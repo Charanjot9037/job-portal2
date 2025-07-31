@@ -3,14 +3,18 @@ import React, { useEffect, useState } from "react";
 import { Badge } from "../components/ui/badge";
 import { setSingleJob } from "@/redux/jobSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from 'next/navigation';
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
-
+import { Avatar } from "@/app/components/ui/avatar"; // use shadcn avatar instead
+import { AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 const Jobsdescriptions = ({ id }) => {
   const dispatch = useDispatch();
   const { singleJob } = useSelector((store) => store.job);
   const { User } = useSelector((store) => store.auth);
   const [isApplied, setisApplied] = useState(false);
+const router=useRouter();
+
 
   // Apply Handler
   const applyjobhandler = async () => {
@@ -85,6 +89,7 @@ const Jobsdescriptions = ({ id }) => {
   }
 
   return (
+    
     <motion.div
       className="max-w-7xl mx-auto px-4 my-10"
       initial={{ opacity: 0 }}
@@ -94,9 +99,25 @@ const Jobsdescriptions = ({ id }) => {
       <Toaster />
 
       {/* Header and Action */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+   
+
         <div>
-          <h1 className="font-bold text-2xl text-gray-900">
+               <div className="flex  items-center gap-2 mb-2">
+              <Avatar className="w-10 h-10">
+                              {singleJob?.company.imageUrl ? (
+                                <AvatarImage src={singleJob?.company.imageUrl} alt={singleJob?.company.name } />
+                              ) : (
+                                <AvatarFallback className="bg-gray-200 text-sm p-2">
+                                  {singleJob?.company.name.slice(0, 3).toUpperCase()}
+                                </AvatarFallback>
+                              )}
+                            </Avatar>
+                             <h1 className="font-bold text-2xl text-gray-900">
+            Company: {singleJob?.company.name}
+          </h1>
+        </div>
+          <h1 className="font-bold text-2xl text-gray-600">
             Job Title: {singleJob?.title}
           </h1>
 
@@ -140,6 +161,7 @@ const Jobsdescriptions = ({ id }) => {
       {/* Job Detail Info */}
       <div className="space-y-4 text-sm sm:text-base">
         {[
+            { label: "Company- ", value: singleJob?.company.name || "N/A" },
           { label: "Location", value: singleJob?.location || "N/A" },
           { label: "Description", value: singleJob?.description || "No description provided." },
           { label: "Experience", value: singleJob?.experience || "N/A" },

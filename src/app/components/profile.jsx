@@ -24,7 +24,14 @@ const Profile = () => {
       <div className='flex items-center gap-4'>
  <Avatar
   className="cursor-pointer h-20 w-20 border-2 border-[#] rounded-full">
-                <AvatarImage className="rounded-full"  src={User?.profile?.profilephoto} />
+                {/* <AvatarImage className="rounded-full"  src={User?.profile?.profilephoto} /> */}
+                  <AvatarImage
+                                    src={
+                                      User?.profile?.profilephoto?.trim() === ""
+                                        ? "https://github.com/shadcn.png"
+                                        : User?.profile.profilephoto
+                                    }
+                                  />
               </Avatar>
               <div>
   <h1 className='font-medium text-xl '>{User?.fullname}</h1>

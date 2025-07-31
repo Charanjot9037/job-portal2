@@ -33,9 +33,9 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     profileurl:User?.profile.profile,
   });
 
-  useEffect(() => {
-    console.log("input", input);
-  }, input);
+  // useEffect(() => {
+  //   console.log("input", input);
+  // }, input);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -157,7 +157,12 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
           <div className="grid grid-cols-4 items-center">
                            <div
   className="cursor-pointer h-15 w-15 rounded-full border-2 ">
-                <img className="rounded-full  shadow-2xl  "  src={User?.profile?.profilephoto} />
+                <img className="rounded-full  shadow-2xl  "    src={
+                                      User?.profile?.profilephoto?.trim() === ""
+                                        ? "https://github.com/shadcn.png"
+                                        : User?.profile.profilephoto
+                                    } />
+                 
               </div>
 
  <input

@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
+import { Eye, EyeOff } from "lucide-react";
 export default function SignupPage() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -22,7 +23,8 @@ export default function SignupPage() {
     watch,
     formState: { errors },
   } = useForm();
-
+// export default function ConfirmPasswordField({ register, errors }) {
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
       toast.error("Passwords do not match");
@@ -65,11 +67,16 @@ export default function SignupPage() {
   const handleFileChange = (e) => {
     setFile(e.target.files?.[0]);
   };
-
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleConfirmVisibility = () =>
+    setShowConfirmPassword((prev) => !prev);
+  const toggleVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
     <div className="min-h-screen  flex items-center justify-center px-4">
       <Toaster />
-      <div className="flex justify-center gap-5 border-1 w-8/12 shadow-2xl  rounded-2xl bg-gradient-to-tr">
+      <div className="flex justify-center gap-5 border-1 w-8/12 shadow-2xl px-4  rounded-2xl bg-gradient-to-tr">
 <motion.div
         className=" w-full  max-w-lg   "
         initial={{ opacity: 0, y: 50 }}
@@ -109,7 +116,41 @@ export default function SignupPage() {
           </div>
 
           {/* Password */}
-          <div>
+          <div className="w-full">
+      <label className="block text-sm font-medium mb-1">Password</label>
+
+      {/* Input wrapper */}
+      <div className="relative">
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter your password"
+          {...register("password", { required: "Password is required" })}
+          className={`w-full px-4 py-2 pr-10 border rounded focus:outline-none focus:ring-2 ${
+            errors.password
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-[#6A38C2]"
+          }`}
+        />
+
+        {/* Eye Icon Button */}
+        <button
+          type="button"
+          onClick={toggleVisibility}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          tabIndex={-1}
+        >
+          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      </div>
+
+      {/* Error Message */}
+      {errors.password && (
+        <p className="text-sm text-red-500 mt-1">
+          {errors.password.message}
+        </p>
+      )}
+    </div>
+          {/* <div>
             <label className="block text-sm font-medium mb-1">Password</label>
             <input
               type="password"
@@ -120,19 +161,35 @@ export default function SignupPage() {
               placeholder="••••••••"
             />
             {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
-          </div>
+          </div> */}
 
           {/* Confirm Password */}
           <div>
             <label className="block text-sm font-medium mb-1">Confirm Password</label>
-            <input
-              type="password"
-              {...register("confirmPassword", { required: "Confirm your password" })}
-              className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${
-                errors.confirmPassword ? "border-red-500 focus:ring-red-400" : "border-gray-300 focus:ring-[#6A38C2]"
-              }`}
-              placeholder="••••••••"
-            />
+        <div className="relative">
+        <input
+          type={showConfirmPassword ? "text" : "password"}
+          {...register("confirmPassword", {
+            required: "Confirm your password",
+          })}
+          placeholder="••••••••"
+          className={`w-full px-4 py-2 pr-10 border rounded focus:outline-none focus:ring-2 ${
+            errors.confirmPassword
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-[#6A38C2]"
+          }`}
+        />
+
+        {/* Eye toggle button */}
+        <button
+          type="button"
+          onClick={toggleConfirmVisibility}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          tabIndex={-1}
+        >
+          {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      </div>
             {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
           </div>
 
@@ -202,7 +259,7 @@ export default function SignupPage() {
           </p>
         </form>
       </motion.div>
-     <div className=" ">
+     <div className="hidden lg:flex ">
        <DotLottieReact
          src="https://lottie.host/2b1fa07d-c9ca-4050-9e19-415304bdfdf4/bin17qgYvG.lottie"
     

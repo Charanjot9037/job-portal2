@@ -38,13 +38,26 @@ const {allJobs}=useSelector(store=>store.job)
   {allJobs?.length <= 0 ? (
     <span className="text-2xl font-bold">Please Login to Apply</span>
   ) : (
-    allJobs?.slice(0, 6).map((job) => (
-      <LatestJobCards
-        key={job?._id}
-        job={job}
-        className="cursor-pointer"
-      />
-    ))
+    // allJobs?.slice(0, 6).map((job) => (
+    //   <LatestJobCards
+    //     key={job?._id}
+    //     job={job}
+    //     className="cursor-pointer"
+    //   />
+    // ))
+allJobs
+  ?.slice() // make a shallow copy to avoid mutating original array
+  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // 🔥 newest first
+  .slice(0, 6) // pick top 6 latest
+  .map((job) => (
+    <LatestJobCards
+      key={job?._id}
+      job={job}
+      className="cursor-pointer"
+    />
+))
+
+
   )}
 </div>
 

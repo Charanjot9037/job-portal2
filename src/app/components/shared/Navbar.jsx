@@ -54,15 +54,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 focus:outline-none"
             >
-              {isOpen ? <X size={28} /> :  <Avatar className="cursor-pointer h-10 w-10">
-                  <AvatarImage
-                    src={
-                      User?.profile?.profilephoto?.trim() === ""
-                        ? "https://github.com/shadcn.png"
-                        : User?.profile.profilephoto
-                    }
-                  />
-                </Avatar>}
+              <Menu/>
             </button>
           </div>
         </div>
