@@ -3,7 +3,7 @@
 // import "./globals.css";
 // import Navbar from  './components/shared/Navbar.jsx';
 // import { Toaster } from "react-hot-toast";
-// import { Providers } from "./provider.js";
+
 // import ProgressBar from "./components/progressbar";
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -44,6 +44,7 @@
 //   );
 // }
 // app/layout.js
+import { Providers } from "./provider.js";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/shared/Navbar.jsx";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ProvidersWrapper>
+          
           <ProgressBar />
           <Navbar />
           <Toaster position="top-center" />
