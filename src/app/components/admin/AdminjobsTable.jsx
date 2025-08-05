@@ -121,7 +121,7 @@ const AdminJobsTable = () => {
   const router = useRouter();
 
   const { allAdminJobs, seachJobNytext } = useSelector((store) => store.job);
-  const { "": value } = seachJobNytext;
+  const { "": value } = seachJobNytext||" " ;
 
   const [filteredJobs, setFilteredJobs] = useState(allAdminJobs || []);
 
