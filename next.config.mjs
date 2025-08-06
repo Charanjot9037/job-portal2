@@ -1,13 +1,4 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {};
-
-// export default nextConfig;
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  webpack(config, { isServer }) {
-    config.optimization.splitChunks = false;
-    return config;
-  },
-};
+const nextConfig = {};
 
 export default nextConfig;
