@@ -29,7 +29,7 @@ const Adminjobs = () => {
   }, [input]);
   return (
     <div>
-      <div className="max-w-6xl mx-auto my-10 ">
+      <div className="max-w-6xl mx-auto my-10 sm:bg-transparent ">
         <div className="flex items-center justify-between  my-5 ">
           <Input
             className="w-fit"
