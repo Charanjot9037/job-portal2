@@ -50,5 +50,12 @@ export const store = configureStore({
 });
 
 // Export a fallback persistor
-export const persistor =
-  typeof window !== 'undefined' ? persistStore(store) : { purge: () => {}, flush: () => {} };
+// export const persistor =
+//   typeof window !== 'undefined' ? persistStore(store) : { purge: () => {}, flush: () => {} };
+let persistor;
+
+if (typeof window !== 'undefined') {
+  persistor = persistStore(store);
+}
+
+export { store, persistor };
