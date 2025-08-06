@@ -57,7 +57,7 @@ fecthapplicants();
     <div>
       <Toaster/>
       <div className='max-w-7xl mx-auto'>
-        {console.log("appilcant",applicants)}
+        {/* {console.log("appilcant",applicants)} */}
 <h1 className='font-bold text-xl my-5'>Applicants ({applicants?.application.length})
 
 </h1>
