@@ -19,25 +19,21 @@
 //   typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
 // export default storage;
-// import { createWebStorage } from "redux-persist/lib/storage/createWebStorage";
-import createWebStorage from 'redux-persist/lib/storage/createWebStorage'; // ✅ CORRECT
+// src/redux/storage.js
 
-const createNoopStorage = () => {
-  return {
-    getItem(_key) {
-      return Promise.resolve(null);
-    },
-    setItem(_key, value) {
-      return Promise.resolve(value);
-    },
-    removeItem(_key) {
-      return Promise.resolve();
-    },
-  };
+const createWebStorage = () => {
+  if (typeof window === 'undefined') {
+    return {
+      getItem: () => null,
+      setItem: () => {},
+      removeItem: () => {},
+    };
+  }
+
+  // Use require() to handle CJS module
+  const storage = require('redux-persist/lib/storage/createWebStorage').default;
+  return storage('local');
 };
 
-const storage =
-  typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
-
-export default storage;
+export default createWebStorage();
 
