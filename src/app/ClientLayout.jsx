@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast';
 // const ProvidersWrapper = dynamic(() => import('@/app/providers/ProvidersWrapper'), {
 //   ssr: false,
 // });
-const ProvidersWrapper = dynamic(() => import('@/app/providers/ProvidersWrapper'), {
+const ProvidersWrapper = dynamic(() => import('@/app/providers/ProvidersWrapper.js'), {
   ssr: false,
 });
 
