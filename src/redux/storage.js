@@ -21,19 +21,18 @@
 // export default storage;
 // src/redux/storage.js
 
-const createWebStorage = () => {
-  if (typeof window === 'undefined') {
-    return {
-      getItem: () => null,
-      setItem: () => {},
-      removeItem: () => {},
-    };
-  }
+let storage;
 
-  // Use require() to handle CJS module
-  const storage = require('redux-persist/lib/storage/createWebStorage').default;
-  return storage('local');
-};
+if (typeof window !== 'undefined') {
+  // Only require on client side
+  storage = require('redux-persist/lib/storage').default;
+} else {
+  // Noop for server
+  storage = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+  };
+}
 
-export default createWebStorage();
-
+export default storage;
