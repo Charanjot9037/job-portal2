@@ -1,3 +1,4 @@
+'use client'
 // // redux/persistedStore.js
 // import { configureStore, combineReducers } from "@reduxjs/toolkit";
 // import authSlice from './authSlice.js';
