@@ -51,6 +51,8 @@ import authSlice from './authSlice.js';
 import jobSlice from './jobSlice.js';
 import companySlice from './companySlice.js';
 import ApplicationSlice from './applicationslice.js';
+import storage from './storage.js'; // adjust path as needed
+
 
 // Always import persist methods
 import {
@@ -64,8 +66,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-// For storage, we’ll conditionally import
-import storage from 'redux-persist/lib/storage';
+
 
 const rootReducer = combineReducers({
   auth: authSlice,

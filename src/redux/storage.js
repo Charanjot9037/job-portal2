@@ -1,19 +1,21 @@
-// redux/storage.js
-const isServer = typeof window === 'undefined';
+// utils/createStorage.js
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
-const storage = {
-  getItem: (key) => {
-    if (isServer) return null;
-    return localStorage.getItem(key);
-  },
-  setItem: (key, value) => {
-    if (isServer) return;
-    localStorage.setItem(key, value);
-  },
-  removeItem: (key) => {
-    if (isServer) return;
-    localStorage.removeItem(key);
-  },
+const createNoopStorage = () => {
+  return {
+    getItem(_key) {
+      return Promise.resolve(null);
+    },
+    setItem(_key, value) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key) {
+      return Promise.resolve();
+    },
+  };
 };
+
+const storage =
+  typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
 export default storage;
