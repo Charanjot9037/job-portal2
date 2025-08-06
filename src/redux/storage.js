@@ -19,24 +19,16 @@
 //   typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
 // export default storage;
-// ✅ Use the correct path with .js extension
+// src/redux/storage.js
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage.js';
 
-const createNoopStorage = () => {
-  return {
-    getItem(_key) {
-      return Promise.resolve(null);
-    },
-    setItem(_key, value) {
-      return Promise.resolve(value);
-    },
-    removeItem(_key) {
-      return Promise.resolve();
-    },
-  };
-};
-
 const storage =
-  typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
+  typeof window !== 'undefined'
+    ? createWebStorage('local')
+    : {
+        getItem() { return Promise.resolve(null); },
+        setItem() { return Promise.resolve(); },
+        removeItem() { return Promise.resolve(); },
+      };
 
 export default storage;
