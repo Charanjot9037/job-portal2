@@ -19,10 +19,8 @@
 //   typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
 // export default storage;
-// ✅ FIXED: Correct way to import createWebStorage
-import * as storageModule from 'redux-persist/lib/storage/createWebStorage';
-
-const createWebStorage = storageModule.default || storageModule.createWebStorage;
+// ✅ Use the correct path with .js extension
+import createWebStorage from 'redux-persist/lib/storage/createWebStorage.js';
 
 const createNoopStorage = () => {
   return {
@@ -39,6 +37,6 @@ const createNoopStorage = () => {
 };
 
 const storage =
-  typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
+  typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
 
 export default storage;
