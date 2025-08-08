@@ -43,7 +43,7 @@ const AppliedJobTables = () => {
               </TableCell>
             </TableRow>
           ) : (
-            allappliedjob.map((appliedjob, index) => (
+            allappliedjob?.map((appliedjob, index) => (
               <motion.tr
                 key={appliedjob?._id}
                 initial={{ opacity: 0, y: 10 }}
